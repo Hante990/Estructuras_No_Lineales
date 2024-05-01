@@ -362,7 +362,7 @@ Este método proporciona una mayor precisión que el Método del Trapecio para l
     }
 <h4> <font font face = "arial"> Programa ejecutado </h4>
 
-[Screenshot 2024-05-01 122725](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/88fc0e4d-4e71-4a33-a0ff-b4172ca14b23)
+![Screenshot 2024-05-01 122725](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/6238fa7a-8f66-45e2-8ced-6eac6ac14b70)
 
 <h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método de la Cuadratura Gaussiana ">   Transformación de la expresión de infija a postfija </a> </font> </h3>
 
