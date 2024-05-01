@@ -170,62 +170,73 @@ Este método proporciona una mayor precisión que el Método del Trapecio para l
 
 <h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
 
-    package Método_Simpson1_3;
-    
-    import java.util.function.Function;
-    /**
-     *
-     * @author Migue
-     */
-    public class Ejercicio1 {
-        // Método para calcular la integral numérica utilizando el Método de Simpson 1/3
-        public static double integrate(double a, double b, int n, Function<Double, Double> func) {
-            double h = (b - a) / n;
-            double sum = func.apply(a) + func.apply(b);
-    
-            for (int i = 1; i < n; i += 2) {
-                double x = a + i * h;
-                sum += 4 * func.apply(x);
-            }
-    
-            for (int i = 2; i < n - 1; i += 2) {
-                double x = a + i * h;
-                sum += 2 * func.apply(x);
-            }
-    
-            return (h / 3) * sum;
+    class Nodo {
+    int valor;
+    Nodo izquierda, derecha;
+
+    public Nodo(int item) {
+        valor = item;
+        izquierda = derecha = null;
+     }
+    }
+
+    public class ArbolBinario {
+    Nodo raiz;
+
+    public ArbolBinario() {
+        raiz = null;
+    }
+
+    public void insertar(int valor) {
+        raiz = insertarRec(raiz, valor);
+    }
+
+    private Nodo insertarRec(Nodo raiz, int valor) {
+        if (raiz == null) {
+            raiz = new Nodo(valor);
+            return raiz;
         }
-        
-        // Método para calcular la derivada numérica utilizando el Método de Simpson 1/3
-        public static double differentiate(double x, double h, Function<Double, Double> func) {
-            double result = (func.apply(x - 2 * h) - 8 * func.apply(x - h) + 8 * func.apply(x + h) - func.apply(x + 2 * h)) / (12 * h);
-            return result;
+
+        if (valor < raiz.valor) {
+            raiz.izquierda = insertarRec(raiz.izquierda, valor);
+        } else if (valor > raiz.valor) {
+            raiz.derecha = insertarRec(raiz.derecha, valor);
         }
-        
-        public static void main(String[] args) {
-            // Definir la función que se desea integrar y diferenciar
-            Function<Double, Double> func = (x) -> Math.sin(x); // Ejemplo: función seno
-            
-            // Definir los límites de integración y el número de segmentos
-            double a = 0; // Límite inferior
-            double b = Math.PI / 2; // Límite superior
-            int n = 4; // Número de segmentos (debe ser par para el Método de Simpson 1/3)
-            
-            // Calcular la integral numérica utilizando el Método de Simpson 1/3
-            double integral = integrate(a, b, n, func);
-            System.out.println("Resultado de la integración: " + integral);
-            
-            // Calcular la derivada numérica utilizando el Método de Simpson 1/3
-            double x0 = Math.PI / 4; // Punto en el que se desea calcular la derivada
-            double h = 0.1; // Tamaño del paso
-            double derivative = differentiate(x0, h, func);
-            System.out.println("Resultado de la diferenciación en x = " + x0 + ": " + derivative);
+
+        return raiz;
+    }
+
+    public void inorder() {
+        inorderRec(raiz);
+    }
+
+    private void inorderRec(Nodo raiz) {
+        if (raiz != null) {
+            inorderRec(raiz.izquierda);
+            System.out.print(raiz.valor + " ");
+            inorderRec(raiz.derecha);
         }
     }
 
-<h4> <font font face = "arial"> Programa ejecutado </h4>
+    public static void main(String[] args) {
+        ArbolBinario arbol = new ArbolBinario();
 
-![Captura de pantalla 2024-04-21 142010](https://github.com/MiguelAngelFlores3/M-TODOS_T4/assets/167603831/4790a5b1-9e8c-4d36-ac32-fc21be24a584)
+        arbol.insertar(50);
+        arbol.insertar(30);
+        arbol.insertar(20);
+        arbol.insertar(40);
+        arbol.insertar(70);
+        arbol.insertar(60);
+        arbol.insertar(80);
+
+        System.out.println("Recorrido:");
+        arbol.inorder();
+     }
+    }
+
+<h4> <font font face = "arial"> Programa ejecutado </h4>
+    
+![Screenshot 2024-05-01 140506](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/3e9ef0cb-588c-4baa-8348-f87c9a85a420)
 
 <h3 align = "center"> <font  font face = "bauhaus 93"> <a name="Recorridos"> Recorridos de los  árbol (PRE- IN-POST ORDEN)</a> </font> </h3>
 
@@ -335,7 +346,7 @@ Este método proporciona una mayor precisión que el Método del Trapecio para l
 
 ![Screenshot 2024-05-01 122725](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/6238fa7a-8f66-45e2-8ced-6eac6ac14b70)
 
-<h3 align = "center"> <font  font face = "bauhaus 93"> <a name="Transformacion">   Transformación de la expresión de infija a postfija </a> </font> </h3>
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name="Transformacion"> Transformación de la expresión de infija a postfija </a> </font> </h3>
 
 <h4> <font font face = "arial"> Descripción </h4>
   
@@ -566,68 +577,56 @@ El TDA de un Grafo en estructura de datos es esencial para modelar y analizar re
 
 <h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
 
-    import java.util.ArrayList;
-    import java.util.HashMap;
-    import java.util.List;
-    import java.util.Map;
-    import java.util.Scanner;
+    import java.util.*;
+    public class TDA {
+    private int V;
+    private Map<Integer, Set<Integer>> ady;
 
-    class GrafoDirigido {
-       private Map<Integer, List<Integer>> grafo;
-
-    public GrafoDirigido() {
-        this.grafo = new HashMap<>();
-    }
-
-    public void agregarVertice(int vertice) {
-        grafo.put(vertice, new ArrayList<>());
-    }
-
-    public void agregarArista(int origen, int destino) {
-        if (!grafo.containsKey(origen) || !grafo.containsKey(destino)) {
-            System.out.println("Vertice no encontrado");
-            return;
+    public TDA(int v) {
+        V = v;
+        ady = new HashMap<>();
+        for (int i = 0; i < v; i++) {
+            ady.put(i, new HashSet<>());
         }
-        grafo.get(origen).add(destino);
     }
 
-    public List<Integer> obtenerAdyacentes(int vertice) {
-        return grafo.get(vertice);
+    public void agregarArista(int v, int w) {
+        ady.get(v).add(w);
+        ady.get(w).add(v); 
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        GrafoDirigido grafo = new GrafoDirigido();
-
-        System.out.print("Ingrese el número de vértices: ");
-        int numVertices = scanner.nextInt();
-
-        for (int i = 1; i <= numVertices; i++) {
-            grafo.agregarVertice(i);
+    public void mostrarGrafo() {
+        for (int i = 0; i < V; i++) {
+            System.out.println("\nGrafo" + i);
+            System.out.print("head");
+            for (Integer nodo : ady.get(i)) {
+                System.out.print(" -> " + nodo);
+            }
+            System.out.println();
         }
-
-        System.out.print("Ingrese el número de aristas: ");
-        int numAristas = scanner.nextInt();
-
-        for (int i = 0; i < numAristas; i++) {
-            System.out.print("Ingrese el origen de la arista: ");
-            int origen = scanner.nextInt();
-            System.out.print("Ingrese el destino de la arista: ");
-            int destino = scanner.nextInt();
-            grafo.agregarArista(origen, destino);
-        }
-
-        System.out.println("Grafo dirigido creado:");
-        for (int vertice : grafo.grafo.keySet()) {
-            System.out.println("Adyacentes de " + vertice + ": " + grafo.obtenerAdyacentes(vertice));
-        }
-      }
     }
+
+    public static void main(String args[]) {
+        TDA g = new TDA(5);
+
+        g.agregarArista(0, 1);
+        g.agregarArista(0, 4);
+        g.agregarArista(1, 2);
+        g.agregarArista(1, 3);
+        g.agregarArista(1, 4);
+        g.agregarArista(2, 3);
+        g.agregarArista(3, 4);
+
+        g.mostrarGrafo();
+     }
+    }
+
+
 
 
 <h4> <font font face = "arial"> Programa ejecutado </h4>
     
-![WhatsApp Image 2024-05-01 at 00 15 23_235be8d5](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/c8873586-dba3-4b6b-8b26-3f8c3f5d7568)
+![Screenshot 2024-05-01 140201](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/7b41112f-c89e-4a84-b3c1-26e5e521bb14)
 
 <h3 align = "center"> <font  font face = "bauhaus 93"> <a name="Lista">  Implementación mediante matrices de adyacencia /// Implementación mediante listas de adyacencias </a> </font> </h3>
 
