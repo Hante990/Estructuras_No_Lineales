@@ -446,3 +446,145 @@ La transformación de una expresión de infija a postfija en estructura de datos
     
 ![WhatsApp Image 2024-04-30 at 23 58 00_09db4158](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/89f19b10-5ea5-4de8-b045-d6ad0effbf43)
 
+-----------------------------------------------------------------------------------------
+
+<h2 align = "center"> <font  font face = "bauhaus 93"> <a name="Métodos"> Grafos </a> </font> </h2>
+
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio ">  Implementación de un Grafo (dirigido Y no dirigido ) </a> </font> </h3>
+
+<h4> <font font face = "arial"> Descripción </h4>
+  
+La implementación de grafos, tanto dirigidos como no dirigidos, en estructura de datos es esencial para modelar y analizar relaciones complejas, optimizar operaciones, estudiar la conectividad y aplicar algoritmos avanzados en una amplia gama de problemas computacionales.
+
+<h4> <font font face = "arial"> <b> <i> Ejemplo en código de grafo dirigido </i> </b> </h4>
+
+    import java.util.ArrayList;
+    import java.util.HashMap;
+    import java.util.List;
+    import java.util.Map;
+    import java.util.Scanner;
+
+    class GrafoDirigido {
+       private Map<Integer, List<Integer>> grafo;
+
+    public GrafoDirigido() {
+        this.grafo = new HashMap<>();
+    }
+
+    public void agregarVertice(int vertice) {
+        grafo.put(vertice, new ArrayList<>());
+    }
+
+    public void agregarArista(int origen, int destino) {
+        if (!grafo.containsKey(origen) || !grafo.containsKey(destino)) {
+            System.out.println("Vertice no encontrado");
+            return;
+        }
+        grafo.get(origen).add(destino);
+    }
+
+    public List<Integer> obtenerAdyacentes(int vertice) {
+        return grafo.get(vertice);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        GrafoDirigido grafo = new GrafoDirigido();
+
+        System.out.print("Ingrese el número de vértices: ");
+        int numVertices = scanner.nextInt();
+
+        for (int i = 1; i <= numVertices; i++) {
+            grafo.agregarVertice(i);
+        }
+
+        System.out.print("Ingrese el número de aristas: ");
+        int numAristas = scanner.nextInt();
+
+        for (int i = 0; i < numAristas; i++) {
+            System.out.print("Ingrese el origen de la arista: ");
+            int origen = scanner.nextInt();
+            System.out.print("Ingrese el destino de la arista: ");
+            int destino = scanner.nextInt();
+            grafo.agregarArista(origen, destino);
+        }
+
+        System.out.println("Grafo dirigido creado:");
+        for (int vertice : grafo.grafo.keySet()) {
+            System.out.println("Adyacentes de " + vertice + ": " + grafo.obtenerAdyacentes(vertice));
+        }
+      }
+    }
+
+
+<h4> <font font face = "arial"> Programa ejecutado </h4>
+    
+![WhatsApp Image 2024-05-01 at 00 15 23_235be8d5](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/c8873586-dba3-4b6b-8b26-3f8c3f5d7568)
+
+<h4> <font font face = "arial"> <b> <i> Ejemplo en código de grafo no dirigido </i> </b> </h4>
+
+    import java.util.ArrayList;
+    import java.util.HashMap;
+    import java.util.List;
+    import java.util.Map;
+    import java.util.Scanner;
+
+    public class GrafoNoDirigido {
+
+    private Map<Integer, List<Integer>> grafo;
+
+    public GrafoNoDirigido() {
+        this.grafo = new HashMap<>();
+    }
+
+    public void agregarVertice(int vertice) {
+        grafo.put(vertice, new ArrayList<>());
+    }
+
+    public void agregarArista(int vertice1, int vertice2) {
+        if (!grafo.containsKey(vertice1) || !grafo.containsKey(vertice2)) {
+            System.out.println("Vertice no encontrado");
+            return;
+        }
+        grafo.get(vertice1).add(vertice2);
+        grafo.get(vertice2).add(vertice1);
+    }
+
+    public List<Integer> obtenerAdyacentes(int vertice) {
+        return grafo.get(vertice);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        GrafoNoDirigido grafo = new GrafoNoDirigido();
+
+        System.out.print("Ingrese el número de vértices: ");
+        int numVertices = scanner.nextInt();
+
+        for (int i = 1; i <= numVertices; i++) {
+            grafo.agregarVertice(i);
+        }
+
+        System.out.print("Ingrese el número de aristas: ");
+        int numAristas = scanner.nextInt();
+
+        for (int i = 0; i < numAristas; i++) {
+            System.out.print("Ingrese el primer vértice de la arista: ");
+            int vertice1 = scanner.nextInt();
+            System.out.print("Ingrese el segundo vértice de la arista: ");
+            int vertice2 = scanner.nextInt();
+            grafo.agregarArista(vertice1, vertice2);
+        }
+
+        System.out.println("Grafo no dirigido creado:");
+        for (int vertice : grafo.grafo.keySet()) {
+            System.out.println("Adyacentes de " + vertice + ": " + grafo.obtenerAdyacentes(vertice));
+        }
+      }
+    }
+
+<h4> <font font face = "arial"> Programa ejecutado </h4>
+    
+![WhatsApp Image 2024-05-01 at 00 24 28_e3b56784](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/164a0e06-ff8d-42f9-9a51-8d1815765f29)
+
+
