@@ -587,4 +587,407 @@ La implementación de grafos, tanto dirigidos como no dirigidos, en estructura d
     
 ![WhatsApp Image 2024-05-01 at 00 24 28_e3b56784](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/164a0e06-ff8d-42f9-9a51-8d1815765f29)
 
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio ">  TDA de un  Grafo  </a> </font> </h3>
+
+<h4> <font font face = "arial"> Descripción </h4>
+  
+El TDA de un Grafo en estructura de datos es esencial para modelar y analizar relaciones complejas, optimizar operaciones, estudiar la conectividad y aplicar algoritmos avanzados en una amplia gama de problemas computacionales.
+
+<h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
+
+    import java.util.ArrayList;
+    import java.util.HashMap;
+    import java.util.List;
+    import java.util.Map;
+    import java.util.Scanner;
+
+    class GrafoDirigido {
+       private Map<Integer, List<Integer>> grafo;
+
+    public GrafoDirigido() {
+        this.grafo = new HashMap<>();
+    }
+
+    public void agregarVertice(int vertice) {
+        grafo.put(vertice, new ArrayList<>());
+    }
+
+    public void agregarArista(int origen, int destino) {
+        if (!grafo.containsKey(origen) || !grafo.containsKey(destino)) {
+            System.out.println("Vertice no encontrado");
+            return;
+        }
+        grafo.get(origen).add(destino);
+    }
+
+    public List<Integer> obtenerAdyacentes(int vertice) {
+        return grafo.get(vertice);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        GrafoDirigido grafo = new GrafoDirigido();
+
+        System.out.print("Ingrese el número de vértices: ");
+        int numVertices = scanner.nextInt();
+
+        for (int i = 1; i <= numVertices; i++) {
+            grafo.agregarVertice(i);
+        }
+
+        System.out.print("Ingrese el número de aristas: ");
+        int numAristas = scanner.nextInt();
+
+        for (int i = 0; i < numAristas; i++) {
+            System.out.print("Ingrese el origen de la arista: ");
+            int origen = scanner.nextInt();
+            System.out.print("Ingrese el destino de la arista: ");
+            int destino = scanner.nextInt();
+            grafo.agregarArista(origen, destino);
+        }
+
+        System.out.println("Grafo dirigido creado:");
+        for (int vertice : grafo.grafo.keySet()) {
+            System.out.println("Adyacentes de " + vertice + ": " + grafo.obtenerAdyacentes(vertice));
+        }
+      }
+    }
+
+
+<h4> <font font face = "arial"> Programa ejecutado </h4>
+    
+![WhatsApp Image 2024-05-01 at 00 15 23_235be8d5](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/c8873586-dba3-4b6b-8b26-3f8c3f5d7568)
+
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio ">  Implementación mediante matrices de adyacencia /// Implementación mediante listas de adyacencias </a> </font> </h3>
+
+<h4> <font font face = "arial"> Descripción </h4>
+  
+La elección entre matrices de adyacencia y listas de adyacencias depende del tipo de grafo, el tamaño del grafo y las operaciones que se necesitan realizar sobre el grafo. Ambas implementaciones tienen sus ventajas y desventajas, y la decisión final dependerá de los requisitos específicos de la aplicación.
+
+<h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
+
+    public class Grafo {
+    private int V; // Número de vértices
+    private LinkedList<Integer> adj[]; // Lista de adyacencia
+
+    public Grafo(int v) {
+        V = v;
+        adj = new LinkedList[v];
+        for (int i = 0; i < v; ++i)
+            adj[i] = new LinkedList<>();
+    }
+
+    // Método para agregar una arista al grafo
+    public void agregarArista(int v, int w) {
+        adj[v].add(w);
+        adj[w].add(v); // Para un grafo no dirigido
+    }
+
+    // Método para imprimir el grafo
+    public void imprimirGrafo() {
+        for (int i = 0; i < V; ++i) {
+            System.out.print("Vértice " + i + " está conectado a: ");
+            for (Integer n : adj[i]) {
+                System.out.print(n + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String args[]) {
+        Grafo g = new Grafo(5);
+        g.agregarArista(0, 1);
+        g.agregarArista(0, 4);
+        g.agregarArista(1, 2);
+        g.agregarArista(1, 3);
+        g.agregarArista(1, 4);
+        g.agregarArista(2, 3);
+        g.agregarArista(3, 4);
+
+        g.imprimirGrafo();
+     }
+    }
+
+
+<h4> <font font face = "arial"> Programa ejecutado </h4>
+    
+![Screenshot 2024-05-01 125649](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/59e4754c-6ed0-48ee-a11a-b3b9ceac2d34)
+
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio ">  Recorridos sobre grafos. (Recorrido primero en profundidad y recorrido primero en amplitud) </a> </font> </h3>
+
+<h4> <font font face = "arial"> Descripción </h4>
+  
+Tanto el recorrido primero en profundidad (DFS) como el recorrido primero en amplitud (BFS) son estrategias fundamentales en la implementación y manipulación de grafos en estructura de datos, cada una con sus propias características y aplicaciones.
+
+<h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
+
+    public class Grafo {
+    private int V; // Número de vértices
+    private LinkedList<Integer> adj[]; // Lista de adyacencia
+
+    public Grafo(int v) {
+        V = v;
+        adj = new LinkedList[v];
+        for (int i = 0; i < v; ++i)
+            adj[i] = new LinkedList<>();
+    }
+
+    // Método para agregar una arista al grafo
+    public void agregarArista(int v, int w) {
+        adj[v].add(w);
+        adj[w].add(v); // Para un grafo no dirigido
+    }
+
+    // Método para imprimir el grafo
+    public void imprimirGrafo() {
+        for (int i = 0; i < V; ++i) {
+            System.out.print("Vértice " + i + " está conectado a: ");
+            for (Integer n : adj[i]) {
+                System.out.print(n + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String args[]) {
+        Grafo g = new Grafo(5);
+        g.agregarArista(0, 1);
+        g.agregarArista(0, 4);
+        g.agregarArista(1, 2);
+        g.agregarArista(1, 3);
+        g.agregarArista(1, 4);
+        g.agregarArista(2, 3);
+        g.agregarArista(3, 4);
+
+        g.imprimirGrafo();
+     }
+    }
+
+
+<h4> <font font face = "arial"> Programa ejecutado </h4>
+    
+![Screenshot 2024-05-01 125649](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/59e4754c-6ed0-48ee-a11a-b3b9ceac2d34)
+
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio "> El algoritmo de Kruskal </a> </font> </h3>
+
+<h4> <font font face = "arial"> Descripción </h4>
+  
+El algoritmo de Kruskal es un método efectivo para encontrar el árbol recubridor mínimo en grafos conexos y ponderados. Utiliza estructuras de datos como cola de prioridades y union-find para lograr su objetivo.
+
+<h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
+    
+    class Edge implements Comparable<Edge> {
+    int source, destination, weight;
+
+    public Edge(int source, int destination, int weight) {
+        this.source = source;
+        this.destination = destination;
+        this.weight = weight;
+    }
+
+    @Override
+    public int compareTo(Edge otherEdge) {
+        return this.weight - otherEdge.weight;
+      }
+    }
+
+    class Graph {
+    int vertices;
+    ArrayList<Edge> edges;
+
+    public Graph(int vertices) {
+        this.vertices = vertices;
+        edges = new ArrayList<>();
+    }
+
+    public void addEdge(int source, int destination, int weight) {
+        edges.add(new Edge(source, destination, weight));
+     }
+    }
+
+    public class Main {
+    public static void main(String[] args) {
+        int vertices = 4;
+        Graph graph = new Graph(vertices);
+        graph.addEdge(0, 1, 10);
+        graph.addEdge(0, 2, 6);
+        graph.addEdge(0, 3, 5);
+        graph.addEdge(1, 3, 15);
+        graph.addEdge(2, 3, 4);
+
+        kruskalMST(graph);
+    }
+
+    public static void kruskalMST(Graph graph) {
+        PriorityQueue<Edge> pq = new PriorityQueue<>(graph.edges);
+        ArrayList<Edge> result = new ArrayList<>();
+        int[] parent = new int[graph.vertices];
+        for (int i = 0; i < graph.vertices; i++)
+            parent[i] = i;
+
+        while (!pq.isEmpty()) {
+            Edge edge = pq.poll();
+            int u = find(parent, edge.source);
+            int v = find(parent, edge.destination);
+            if (u != v) {
+                result.add(edge);
+                parent[u] = v;
+            }
+        }
+
+        System.out.println("HOLA");
+        for (Edge edge : result) {
+            System.out.println(edge.source + " - " + edge.destination + ": " + edge.weight);
+        }
+    }
+
+    public static int find(int[] parent, int vertex) {
+        if (parent[vertex] != vertex)
+            parent[vertex] = find(parent, parent[vertex]);
+        return parent[vertex];
+      }
+    }
+
+<h4> <font font face = "arial"> Programa ejecutado </h4>
+    
+![Screenshot 2024-05-01 125![WhatsApp Image 2024-04-30 at 23 37 58_fc1eed03](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/1a12e4d6-4a5c-49ae-a686-6c3fa6834cd2)
+
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio "> Búsquedas de caminos </a> </font> </h3>
+
+<h4> <font font face = "arial"> Descripción </h4>
+  
+Las búsquedas de caminos en estructura de datos son fundamentales para resolver problemas de optimización, planificación y análisis de conectividad, utilizando algoritmos especializados que permiten encontrar rutas eficientes y soluciones óptimas en diversos escenarios.
+
+<h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
+
+    class Grafo {
+     private int V; // Número de vértices
+     private LinkedList<Integer> adj[]; // Lista de adyacencia
+
+    Grafo(int v) {
+        V = v;
+        adj = new LinkedList[v];
+        for (int i = 0; i < v; ++i)
+            adj[i] = new LinkedList();
+    }
+
+    void agregarArista(int v, int w) {
+        adj[v].add(w);
+    }
+
+    void DFSUtil(int v, boolean visitado[]) {
+        visitado[v] = true;
+        System.out.print(v + " ");
+
+        Iterator<Integer> i = adj[v].listIterator();
+        while (i.hasNext()) {
+            int n = i.next();
+            if (!visitado[n])
+                DFSUtil(n, visitado);
+        }
+    }
+
+    void DFS(int v) {
+        boolean visitado[] = new boolean[V];
+        DFSUtil(v, visitado);
+     }
+    }
+
+    public class Main {
+    public static void main(String args[]) {
+        Grafo g = new Grafo(4);
+
+        g.agregarArista(0, 1);
+        g.agregarArista(0, 2);
+        g.agregarArista(1, 2);
+        g.agregarArista(2, 0);
+        g.agregarArista(2, 3);
+        g.agregarArista(3, 3);
+
+        System.out.println("Recorrido en Profundidad empezando desde el vértice 2:");
+        g.DFS(2);
+     }
+    }
+<h4> <font font face = "arial"> Programa ejecutado </h4>
+  
+![WhatsApp Image 2024-04-30 at 23 41 02_42dcf095](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/041c49f9-a48e-48ab-99f8-eb67ca1382ae)
+
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio "> Algoritmo de Dijkstra </a> </font> </h3>
+
+<h4> <font font face = "arial"> Descripción </h4>
+  
+El algoritmo de Dijkstra es una herramienta fundamental en estructura de datos para encontrar la ruta más corta en grafos ponderados y conexos, con aplicaciones en una amplia variedad de problemas de optimización y planificación.
+
+<h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
+
+    class Grafo {
+    private int V; // Número de vértices
+    private List<List<Nodo>> adj; // Lista de adyacencia
+
+    Grafo(int v) {
+        V = v;
+        adj = new ArrayList<>(V);
+        for (int i = 0; i < V; ++i)
+            adj.add(new ArrayList<>());
+    }
+
+    void agregarArista(int origen, int destino, int peso) {
+        Nodo nodo = new Nodo(destino, peso);
+        adj.get(origen).add(nodo);
+    }
+
+    void dijkstra(int origen) {
+        PriorityQueue<Nodo> pq = new PriorityQueue<>(V, Comparator.comparingInt(a -> a.peso));
+
+        int[] distancia = new int[V];
+        Arrays.fill(distancia, Integer.MAX_VALUE);
+        pq.add(new Nodo(origen, 0));
+        distancia[origen] = 0;
+
+        while (!pq.isEmpty()) {
+            int u = pq.poll().vertice;
+
+            for (Nodo nodo : adj.get(u)) {
+                int v = nodo.vertice;
+                int peso = nodo.peso;
+
+                if (distancia[u] != Integer.MAX_VALUE && distancia[u] + peso < distancia[v]) {
+                    distancia[v] = distancia[u] + peso;
+                    pq.add(new Nodo(v, distancia[v]));
+                }
+            }
+        }
+
+        System.out.println("Distancias mínimas desde el vértice " + origen + ":");
+        for (int i = 0; i < V; ++i)
+            System.out.println("Vértice " + i + ": " + distancia[i]);
+    }
+
+    static class Nodo {
+        int vertice;
+        int peso;
+
+        Nodo(int vertice, int peso) {
+            this.vertice = vertice;
+            this.peso = peso;
+        }
+      }
+    }
+
+    public class Main {
+    public static void main(String[] args) {
+        Grafo g = new Grafo(5);
+        g.agregarArista(0, 1, 2);
+        g.agregarArista(0, 2, 4);
+        g.agregarArista(1, 2, 1);
+        g.agregarArista(1, 3, 7);
+        g.agregarArista(2, 4, 3);
+        g.agregarArista(3, 4, 1);
+
+        g.dijkstra(0);
+      }
+    }
+<h4> <font font face = "arial"> Programa ejecutado </h4>
+    
+  ![WhatsApp Image 2024-04-30 at 23 42 52_3683ab1e](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/316f0eaf-1f40-4f3e-a6af-1a8c44341824)
 
