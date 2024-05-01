@@ -79,96 +79,117 @@ Dentro de este documento se encuentran algunos ejemplos en código sobre este ti
 
 -----------------------------------------------------------------------------------------
 
-<h2 align = "center"> <font  font face = "bauhaus 93"> <a name="Métodos"> Métodos</a> </font> </h2>
+<h2 align = "center"> <font  font face = "bauhaus 93"> <a name="Métodos"> Arboles</a> </font> </h2>
 
-<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio ">  Método del Trapecio </a> </font> </h3>
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio "> Implementación de un árbol   </a> </font> </h3>
 
 <h4> <font font face = "arial"> Descripción </h4>
   
-Este método es útil cuando la función a integrar es difícil o imposible de integrar analíticamente, o cuando se necesita una solución numérica rápida y aceptable. Sin embargo, su precisión depende de la cantidad de segmentos utilizados y puede ser superado por métodos más avanzados, como la regla de Simpson, para funciones que son suaves y continuamente diferenciables.
-
-<h4> <font font face = "arial">Pseudocódigo </h4>
-  
-1. Pseudocódigo para realizar la integración
-
-        Función Trapecio_Integración(f, a, b, n):
-            h = (b - a) / n
-            suma = 0.5 * (f(a) + f(b))
-            Para i desde 1 hasta n-1:
-                xi = a + i * h
-                suma = suma + f(xi)
-            resultado = h * suma
-            Devolver resultado
-
-
-2. Pseudocódigo para realizar la diferenciación
-
-        Función Trapecio_Diferenciación(f, a, b, n):
-            h = (b - a) / n
-            suma = f(a) + f(b)
-            Para i desde 1 hasta n-1:
-                xi = a + i * h
-                suma = suma + 2 * f(xi)
-            resultado = h * suma / 2
-            Devolver resultado
+La implementación de un árbol binario en estructura de datos es esencial para optimizar la manipulación, búsqueda y almacenamiento de datos en aplicaciones informáticas, lo que contribuye a mejorar la eficiencia y rendimiento de los algoritmos y sistemas desarrollados.
 
 <h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
 
-    package Método_Trapecio;
+    package Arbol;
     
-    import java.util.function.Function;
+    public class Nodo{
+    int valor;
+    Nodo izquierdo;
+    Nodo derecho
     
-    /**
-     *
-     * @author Migue
-     */
-    public class Ejercicio1 {
-            
-        
-        // Método para calcular la integral numérica utilizando el Método del Trapecio
-        public static double integrate(double a, double b, int n, Function<Double, Double> func) {
-            double h = (b - a) / n;
-            double sum = 0.5 * (func.apply(a) + func.apply(b));
-            
-            for (int i = 1; i < n; i++) {
-                double x = a + i * h;
-                sum += func.apply(x);
-            }
-            
-            return h * sum;
+    public Nodo(int valor){
+        this.valor = valor;
+        this.izquierdo = null;
+        this.derecho = null;
+      }
+    }
+    
+    public class Arbol {
+    Nodo raiz;
+
+    public Arbol() {
+        this.raiz = null;
+    }
+
+    public void insertar(int valor) {
+        raiz = insertarRecursivo(raiz, valor);
+    }
+
+    private Nodo insertarRecursivo(Nodo raiz, int valor) {
+        if (raiz == null) {
+            raiz = new Nodo(valor);
+            return raiz;
         }
-        
-        // Método para calcular la derivada numérica utilizando el Método del Trapecio
-        public static double differentiate(double x, double h, Function<Double, Double> func) {
-            double result = (func.apply(x + h) - func.apply(x - h)) / (2 * h);
-            return result;
+
+        if (valor < raiz.valor) {
+            raiz.izquierdo = insertarRecursivo(raiz.izquierdo, valor);
+        } else if (valor > raiz.valor) {
+            raiz.derecho = insertarRecursivo(raiz.derecho, valor);
         }
-        
-        public static void main(String[] args) {
-            // Definir la función que se desea integrar y diferenciar
-            Function<Double, Double> func = (x) -> Math.sin(x); // Ejemplo: función seno
-            
-            // Definir los límites de integración y el número de segmentos
-            double a = 0; // Límite inferior
-            double b = Math.PI / 2; // Límite superior
-            int n = 1000; // Número de segmentos
-            
-            // Calcular la integral numérica utilizando el Método del Trapecio
-            double integral = integrate(a, b, n, func);
-            System.out.println("Resultado de la integración: " + integral);
-            
-            // Calcular la derivada numérica utilizando el Método del Trapecio
-            double x0 = Math.PI / 4; // Punto en el que se desea calcular la derivada
-            double h = 0.001; // Tamaño del paso
-            double derivative = differentiate(x0, h, func);
-            System.out.println("Resultado de la diferenciación en x = " + x0 + ": " + derivative);
-            
+
+        return raiz;
+    }
+
+    public void recorrerPreOrden() {
+        recorrerPreOrden(raiz);
+    }
+
+    private void recorrerPreOrden(Nodo nodo) {
+        if (nodo != null) {
+            System.out.print(nodo.valor + " ");
+            recorrerPreOrden(nodo.izquierdo);
+            recorrerPreOrden(nodo.derecho);
         }
     }
 
-<h4> <font font face = "arial"> Programa ejecutado </h4>
+    public void recorrerInOrden() {
+        recorrerInOrden(raiz);
+    }
 
-![Captura de pantalla 2024-04-21 134559](https://github.com/MiguelAngelFlores3/Metodos_T4/assets/167603831/dbc10aaf-0a47-49c8-9ebd-f0313ac94924)
+    private void recorrerInOrden(Nodo nodo) {
+        if (nodo != null) {
+            recorrerInOrden(nodo.izquierdo);
+            System.out.print(nodo.valor + " ");
+            recorrerInOrden(nodo.derecho);
+        }
+    }
+
+    public void recorrerPostOrden() {
+        recorrerPostOrden(raiz);
+    }
+
+    private void recorrerPostOrden(Nodo nodo) {
+        if (nodo != null) {
+            recorrerPostOrden(nodo.izquierdo);
+            recorrerPostOrden(nodo.derecho);
+            System.out.print(nodo.valor + " ");
+        }
+      }
+    }
+    public class App {
+    public static void main(String[] args) {
+        Arbol arbol = new Arbol();
+        
+        // Insertar nodos en el árbol
+        arbol.insertar(50);
+        arbol.insertar(30);
+        arbol.insertar(70);
+        arbol.insertar(20);
+        arbol.insertar(40);
+
+        // Recorrer el árbol en preorden, inorden y postorden e imprimir los valores
+        System.out.println("Recorrido PreOrden del árbol:");
+        arbol.recorrerPreOrden();
+        System.out.println("\nRecorrido InOrden del árbol:");
+        arbol.recorrerInOrden();
+        System.out.println("\nRecorrido PostOrden del árbol:");
+        arbol.recorrerPostOrden();
+      }
+    }
+
+
+<h4> <font font face = "arial"> Programa ejecutado </h4>
+    
+![Screenshot 2024-05-01 122725](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/6238fa7a-8f66-45e2-8ced-6eac6ac14b70)
 
 <h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método de Simpson 1/3 ">  Método de Simpson 1/3 </a> </font> </h3>
 
