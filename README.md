@@ -16,12 +16,13 @@
       <ul class = "Indice">
         <li> <a href = "#Descripción"> Descripción </a> <br> </li>
         <li> <a href = "#Temario"> Temario </a> <br> </li>
-        <li> <a href = "#Métodos"> Métodos </a> <br> </li>
+        <li> <a href = "#Arboles"> Arboles </a> <br> </li>
+         <li> <a href = "#Grafos"> Grafos </a> <br> </li>
           <ul class = "subindice">
-              <li> <a href="# Método del Trapecio "> Método del Trapecio </a> <br> </li>
-              <li> <a href="# Método de Simpson 1/3 "> Método de Simpson 1/3 </a> <br> </li>
-              <li> <a href="# Método de Simpson 3/8"> Método de Simpson 3/8 </a> <br> </li> 
-              <li> <a href="# Método de la Cuadratura Gaussiana "> Método de la Cuadratura Gaussiana </a> <br> </li> 
+              <li> <a href="#Implementación"> Implementación del arbol </a> <br> </li>
+              <li> <a href="#TDA">TDA de un árbol </a> <br> </li>
+              <li> <a href="#Recorridos"> Recorridos de los árbol (PRE- IN-POST ORDEN) </a> <br> </li> 
+              <li> <a href="#Tranformacion">  Transformación de la expresión de infija a postfija </a> <br> </li> 
           </ul>
       </ul>
     </nav>
@@ -79,9 +80,9 @@ Dentro de este documento se encuentran algunos ejemplos en código sobre este ti
 
 -----------------------------------------------------------------------------------------
 
-<h2 align = "center"> <font  font face = "bauhaus 93"> <a name="Métodos"> Arboles</a> </font> </h2>
+<h2 align = "center"> <font  font face = "bauhaus 93"> <a name="Arboles"> Arboles</a> </font> </h2>
 
-<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio "> Implementación de un árbol   </a> </font> </h3>
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name="Implementación"> Implementación de un árbol   </a> </font> </h3>
 
 <h4> <font font face = "arial"> Descripción </h4>
   
@@ -191,7 +192,7 @@ La implementación de un árbol binario en estructura de datos es esencial para 
     
 ![Screenshot 2024-05-01 122725](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/6238fa7a-8f66-45e2-8ced-6eac6ac14b70)
 
-<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método de Simpson 1/3 ">   TDA de un árbol  </a> </font> </h3>
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name="TDA">   TDA de un árbol  </a> </font> </h3>
 
 <h4> <font font face = "arial"> Descripción </h4>
 
@@ -256,7 +257,7 @@ Este método proporciona una mayor precisión que el Método del Trapecio para l
 
 ![Captura de pantalla 2024-04-21 142010](https://github.com/MiguelAngelFlores3/M-TODOS_T4/assets/167603831/4790a5b1-9e8c-4d36-ac32-fc21be24a584)
 
-<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método de Simpson 3/8 "> Recorridos de los  árbol (PRE- IN-POST ORDEN)</a> </font> </h3>
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name="Recorridos"> Recorridos de los  árbol (PRE- IN-POST ORDEN)</a> </font> </h3>
 
 <h4> <font font face = "arial"> Descripción </h4>
 
@@ -364,7 +365,7 @@ Este método proporciona una mayor precisión que el Método del Trapecio para l
 
 ![Screenshot 2024-05-01 122725](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/6238fa7a-8f66-45e2-8ced-6eac6ac14b70)
 
-<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método de la Cuadratura Gaussiana ">   Transformación de la expresión de infija a postfija </a> </font> </h3>
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name="Transformacion">   Transformación de la expresión de infija a postfija </a> </font> </h3>
 
 <h4> <font font face = "arial"> Descripción </h4>
   
