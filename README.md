@@ -33,18 +33,19 @@
 <h3 align = "center"> <font  font face = "bauhaus 93">  <a name="Descripción"> Descripción</a> </font> </h3>
 
 Una estructura de datos no lineal es una estructura en la que los elementos de datos no están organizados de manera secuencial. Cada elemento de datos potencialmente se conecta con varios otros elementos, formando una red compleja de conexiones.
-Ejemplos de Estructuras de Datos No Lineales
 Algunas de las estructuras de datos no lineales más comunes son:
+
 <font color = "darkred" font face = "cooper black">Árboles </font>
 Los árboles son una estructura jerárquica donde cada elemento (nodo) puede tener varios hijos, pero solo un padre (excepto la raíz). Ejemplos de árboles incluyen:
-1.-Árboles binarios
-2.-Árboles de búsqueda binaria
-3.-Árboles de decisión
+<li>Árboles binarios</li>
+<li>Árboles de búsqueda binaria</li>
+<li>Árboles de decisión</li>
+
 <font color = "darkred" font face = "cooper black">Grafos </font>
 Los grafos son una estructura que representa un conjunto de objetos (vértices) y las conexiones (aristas) entre ellos. Cada vértice puede estar conectado a múltiples otros vértices. Ejemplos de grafos incluyen:
-1.-Redes sociales
-2.-Mapas y rutas
-3.-Redes de computadoras
+<li>Redes sociales</li>
+<li>Mapas y rutas</li>
+<li>Redes de computadoras</li>
 
 Dentro de este documento se encuentran algunos ejemplos en código sobre este tipo de estructuras de datos no lineales.
 -----------------------------------------------------------------------------------------
