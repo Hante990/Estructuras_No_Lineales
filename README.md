@@ -6,7 +6,6 @@
 <li>Diego Alonso Fernández Delgadillo</li>
 <li>Xavier Valle Dorantes</li>
 <li>José Antonio Guerrero Lazcano</li>
-<li>Kevin Espejel Huerta</li>
 
 -----------------------------------------------------------------------------------------
 
@@ -30,19 +29,19 @@
 
 -----------------------------------------------------------------------------------------
 
-<h4 align = "center"> <font  font face = "bauhaus 93">  <a name="Descripción"> Descripción</a> </font> </h3>
+<h3 align = "center"> <font  font face = "bauhaus 93">  <a name="Descripción"> Descripción</a> </font> </h3>
 
 Una estructura de datos no lineal es una estructura en la que los elementos de datos no están organizados de manera secuencial. Cada elemento de datos potencialmente se conecta con varios otros elementos, formando una red compleja de conexiones.
 Algunas de las estructuras de datos no lineales más comunes son:
 
-<h3 align = "left">Árboles </h3>
+<h4 align = "left">Árboles </h3>
 
 Los árboles son una estructura jerárquica donde cada elemento (nodo) puede tener varios hijos, pero solo un padre (excepto la raíz). Ejemplos de árboles incluyen:
 <li>Árboles binarios</li>
 <li>Árboles de búsqueda binaria</li>
 <li>Árboles de decisión</li>
 
-<h3 align = "left">Grafos </h3>
+<h4 align = "left">Grafos </h3>
 
 Los grafos son una estructura que representa un conjunto de objetos (vértices) y las conexiones (aristas) entre ellos. Cada vértice puede estar conectado a múltiples otros vértices. Ejemplos de grafos incluyen:
 <li>Redes sociales</li>
@@ -54,13 +53,29 @@ Dentro de este documento se encuentran algunos ejemplos en código sobre este ti
 
 <h3 align = "center"> <font  font face = "bauhaus 93">  <a name="Temario"> Temario</a> </font> </h3>
 
-   4.1 Diferenciación Numérica 
+   1.- Implementación de un árbol      
    
-   4.2 Integración Numérica
+   2.- TDA de un árbol 
    
-   4.3 Integración Múltiple
+   3.- Recorridos de los árbol (PRE- IN-POST ORDEN)
    
-   4.4 Aplicación
+   4.- Transformación de la expresión de infija a postfija
+
+   5.-Implementación de un grafo (dirigido Y No dirigido )   
+
+   6.-TDA de un  Grafo 
+
+   7.- Implementación mediante matrices de adyacencia ///
+    Implementación mediante listas de adyacencias.   
+
+   8.- Recorridos sobre grafos. (Recorrido primero en profundidad y Recorrido primero en amplitud).   
+
+   9.-El algoritmo de Kruskal
+   
+   10.-Búsquedas de caminos.
+
+   11.-Algoritmo de Dijkstra
+
 
 -----------------------------------------------------------------------------------------
 
