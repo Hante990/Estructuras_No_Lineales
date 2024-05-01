@@ -17,12 +17,21 @@
         <li> <a href = "#Descripción"> Descripción </a> <br> </li>
         <li> <a href = "#Temario"> Temario </a> <br> </li>
         <li> <a href = "#Arboles"> Arboles </a> <br> </li>
-         <li> <a href = "#Grafos"> Grafos </a> <br> </li>
           <ul class = "subindice">
               <li> <a href="#Implementación"> Implementación del arbol </a> <br> </li>
               <li> <a href="#TDA">TDA de un árbol </a> <br> </li>
               <li> <a href="#Recorridos"> Recorridos de los árbol (PRE- IN-POST ORDEN) </a> <br> </li> 
               <li> <a href="#Tranformacion">  Transformación de la expresión de infija a postfija </a> <br> </li> 
+          </ul>
+            <li> <a href = "#Grafos"> Grafos </a> <br> </li>
+          <ul class = "subindice">
+              <li> <a href="#Implemen"> Implementación de un grafo (dirigido Y no dirigido )   </a> <br> </li>
+              <li> <a href="#TDAG">TDA de un grafo </a> <br> </li>
+              <li> <a href="#Lista"> Implementación mediante listas de adyacencias </a> <br> </li> 
+              <li> <a href="#Recorrido"> Recorridos sobre grafos (Recorrido primero en profundidad y recorrido primero en amplitud) </a> <br> </li> 
+              <li> <a href="#Kruskal"> El algoritmo de Kruskal </a> <br> </li> 
+              <li> <a href="#Busqueda"> Búsquedas de caminos </a> <br> </li> 
+              <li> <a href="#Dijkstra"> Algoritmo de Dijkstra </a> <br> </li> 
           </ul>
       </ul>
     </nav>
@@ -90,107 +99,68 @@ La implementación de un árbol binario en estructura de datos es esencial para 
 
 <h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
 
-    package Arbol;
-    
-    public class Nodo{
+    class Nodo {
     int valor;
-    Nodo izquierdo;
-    Nodo derecho
-    
-    public Nodo(int valor){
-        this.valor = valor;
-        this.izquierdo = null;
-        this.derecho = null;
-      }
+    Nodo izquierdo, derecho;
+
+    public Nodo(int item) {
+        valor = item;
+        izquierdo = derecho = null;
+     }
     }
-    
-    public class Arbol {
+
+    class ArbolBinario {
     Nodo raiz;
 
-    public Arbol() {
-        this.raiz = null;
+    ArbolBinario() {
+        raiz = null;
     }
 
-    public void insertar(int valor) {
-        raiz = insertarRecursivo(raiz, valor);
+    void insertar(int valor) {
+        raiz = insertarRec(raiz, valor);
     }
 
-    private Nodo insertarRecursivo(Nodo raiz, int valor) {
+    Nodo insertarRec(Nodo raiz, int valor) {
         if (raiz == null) {
             raiz = new Nodo(valor);
             return raiz;
         }
 
         if (valor < raiz.valor) {
-            raiz.izquierdo = insertarRecursivo(raiz.izquierdo, valor);
+            raiz.izquierdo = insertarRec(raiz.izquierdo, valor);
         } else if (valor > raiz.valor) {
-            raiz.derecho = insertarRecursivo(raiz.derecho, valor);
+            raiz.derecho = insertarRec(raiz.derecho, valor);
         }
 
         return raiz;
     }
 
-    public void recorrerPreOrden() {
-        recorrerPreOrden(raiz);
-    }
-
-    private void recorrerPreOrden(Nodo nodo) {
+    void inorden(Nodo nodo) {
         if (nodo != null) {
+            inorden(nodo.izquierdo);
             System.out.print(nodo.valor + " ");
-            recorrerPreOrden(nodo.izquierdo);
-            recorrerPreOrden(nodo.derecho);
+            inorden(nodo.derecho);
         }
     }
 
-    public void recorrerInOrden() {
-        recorrerInOrden(raiz);
-    }
-
-    private void recorrerInOrden(Nodo nodo) {
-        if (nodo != null) {
-            recorrerInOrden(nodo.izquierdo);
-            System.out.print(nodo.valor + " ");
-            recorrerInOrden(nodo.derecho);
-        }
-    }
-
-    public void recorrerPostOrden() {
-        recorrerPostOrden(raiz);
-    }
-
-    private void recorrerPostOrden(Nodo nodo) {
-        if (nodo != null) {
-            recorrerPostOrden(nodo.izquierdo);
-            recorrerPostOrden(nodo.derecho);
-            System.out.print(nodo.valor + " ");
-        }
-      }
-    }
-    public class App {
     public static void main(String[] args) {
-        Arbol arbol = new Arbol();
-        
-        // Insertar nodos en el árbol
+        ArbolBinario arbol = new ArbolBinario();
+
         arbol.insertar(50);
         arbol.insertar(30);
         arbol.insertar(70);
         arbol.insertar(20);
         arbol.insertar(40);
 
-        // Recorrer el árbol en preorden, inorden y postorden e imprimir los valores
-        System.out.println("Recorrido PreOrden del árbol:");
-        arbol.recorrerPreOrden();
-        System.out.println("\nRecorrido InOrden del árbol:");
-        arbol.recorrerInOrden();
-        System.out.println("\nRecorrido PostOrden del árbol:");
-        arbol.recorrerPostOrden();
-      }
+        System.out.println("Recorrido Inorden del Árbol:");
+        arbol.inorden(arbol.raiz);
+     }
     }
 
 
 <h4> <font font face = "arial"> Programa ejecutado </h4>
     
-![Screenshot 2024-05-01 122725](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/6238fa7a-8f66-45e2-8ced-6eac6ac14b70)
+![Screenshot 2024-05-01 133922](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/66c7b5a2-31f2-4e77-803d-634ff7d4dde5)
 
 <h3 align = "center"> <font  font face = "bauhaus 93"> <a name="TDA">   TDA de un árbol  </a> </font> </h3>
 
@@ -449,9 +419,9 @@ La transformación de una expresión de infija a postfija en estructura de datos
 
 -----------------------------------------------------------------------------------------
 
-<h2 align = "center"> <font  font face = "bauhaus 93"> <a name="Métodos"> Grafos </a> </font> </h2>
+<h2 align = "center"> <font  font face = "bauhaus 93"> <a name="Grafos"> Grafos </a> </font> </h2>
 
-<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio ">  Implementación de un Grafo (dirigido Y no dirigido ) </a> </font> </h3>
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name="Implemen">  Implementación de un Grafo (dirigido Y no dirigido ) </a> </font> </h3>
 
 <h4> <font font face = "arial"> Descripción </h4>
   
@@ -588,7 +558,7 @@ La implementación de grafos, tanto dirigidos como no dirigidos, en estructura d
     
 ![WhatsApp Image 2024-05-01 at 00 24 28_e3b56784](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/164a0e06-ff8d-42f9-9a51-8d1815765f29)
 
-<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio ">  TDA de un  Grafo  </a> </font> </h3>
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name="TDAG">  TDA de un  Grafo  </a> </font> </h3>
 
 <h4> <font font face = "arial"> Descripción </h4>
   
@@ -659,7 +629,7 @@ El TDA de un Grafo en estructura de datos es esencial para modelar y analizar re
     
 ![WhatsApp Image 2024-05-01 at 00 15 23_235be8d5](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/c8873586-dba3-4b6b-8b26-3f8c3f5d7568)
 
-<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio ">  Implementación mediante matrices de adyacencia /// Implementación mediante listas de adyacencias </a> </font> </h3>
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name="Lista">  Implementación mediante matrices de adyacencia /// Implementación mediante listas de adyacencias </a> </font> </h3>
 
 <h4> <font font face = "arial"> Descripción </h4>
   
@@ -714,7 +684,7 @@ La elección entre matrices de adyacencia y listas de adyacencias depende del ti
     
 ![Screenshot 2024-05-01 125649](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/59e4754c-6ed0-48ee-a11a-b3b9ceac2d34)
 
-<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio ">  Recorridos sobre grafos. (Recorrido primero en profundidad y recorrido primero en amplitud) </a> </font> </h3>
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name="Recorrido">  Recorridos sobre grafos. (Recorrido primero en profundidad y recorrido primero en amplitud) </a> </font> </h3>
 
 <h4> <font font face = "arial"> Descripción </h4>
   
@@ -722,54 +692,83 @@ Tanto el recorrido primero en profundidad (DFS) como el recorrido primero en amp
 
 <h4> <font font face = "arial"> <b> <i> Ejemplo en código </i> </b> </h4>
 
-    public class Grafo {
-    private int V; // Número de vértices
-    private LinkedList<Integer> adj[]; // Lista de adyacencia
+    class Grafo {
+    private int V; 
+    private LinkedList<Integer> adyacencia[]; 
 
-    public Grafo(int v) {
+    Grafo(int v) {
         V = v;
-        adj = new LinkedList[v];
+        adyacencia = new LinkedList[v];
         for (int i = 0; i < v; ++i)
-            adj[i] = new LinkedList<>();
+            adyacencia[i] = new LinkedList();
     }
 
-    // Método para agregar una arista al grafo
-    public void agregarArista(int v, int w) {
-        adj[v].add(w);
-        adj[w].add(v); // Para un grafo no dirigido
+    void agregarArista(int v, int w) {
+        adyacencia[v].add(w);
     }
 
-    // Método para imprimir el grafo
-    public void imprimirGrafo() {
-        for (int i = 0; i < V; ++i) {
-            System.out.print("Vértice " + i + " está conectado a: ");
-            for (Integer n : adj[i]) {
-                System.out.print(n + " ");
+    void DFSUtil(int v, boolean visitado[]) {
+        visitado[v] = true;
+        System.out.print(v + " ");
+
+        Iterator<Integer> it = adyacencia[v].listIterator();
+        while (it.hasNext()) {
+            int n = it.next();
+            if (!visitado[n])
+                DFSUtil(n, visitado);
+        }
+    }
+
+    void DFS(int v) {
+        boolean visitado[] = new boolean[V];
+        DFSUtil(v, visitado);
+    }
+
+    void BFS(int s) {
+        boolean visitado[] = new boolean[V];
+        LinkedList<Integer> cola = new LinkedList<Integer>();
+
+        visitado[s] = true;
+        cola.add(s);
+
+        while (cola.size() != 0) {
+            s = cola.poll();
+            System.out.print(s + " ");
+
+            Iterator<Integer> it = adyacencia[s].listIterator();
+            while (it.hasNext()) {
+                int n = it.next();
+                if (!visitado[n]) {
+                    visitado[n] = true;
+                    cola.add(n);
+                }
             }
-            System.out.println();
         }
     }
 
     public static void main(String args[]) {
-        Grafo g = new Grafo(5);
-        g.agregarArista(0, 1);
-        g.agregarArista(0, 4);
-        g.agregarArista(1, 2);
-        g.agregarArista(1, 3);
-        g.agregarArista(1, 4);
-        g.agregarArista(2, 3);
-        g.agregarArista(3, 4);
+        Grafo g = new Grafo(4);
 
-        g.imprimirGrafo();
+        g.agregarArista(0, 1);
+        g.agregarArista(0, 2);
+        g.agregarArista(1, 2);
+        g.agregarArista(2, 0);
+        g.agregarArista(2, 3);
+        g.agregarArista(3, 3);
+
+        System.out.println("Recorrido primero en profundidad (DFS) desde el vertice 2:");
+        g.DFS(2);
+
+        System.out.println("\nRecorrido primero en amplitud (BFS) desde el vertice 2:");
+        g.BFS(2);
      }
     }
 
-
 <h4> <font font face = "arial"> Programa ejecutado </h4>
-    
-![Screenshot 2024-05-01 125649](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/59e4754c-6ed0-48ee-a11a-b3b9ceac2d34)
+  
+![Screenshot 2024-05-01 134505](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/cfa05bac-5873-4247-bb3b-7a82e1dfb1f4)
 
-<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio "> El algoritmo de Kruskal </a> </font> </h3>
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name="Kruskal"> El algoritmo de Kruskal </a> </font> </h3>
 
 <h4> <font font face = "arial"> Descripción </h4>
   
@@ -853,7 +852,7 @@ El algoritmo de Kruskal es un método efectivo para encontrar el árbol recubrid
     
 ![Screenshot 2024-05-01 125![WhatsApp Image 2024-04-30 at 23 37 58_fc1eed03](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/1a12e4d6-4a5c-49ae-a686-6c3fa6834cd2)
 
-<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio "> Búsquedas de caminos </a> </font> </h3>
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name="Busqueda"> Búsquedas de caminos </a> </font> </h3>
 
 <h4> <font font face = "arial"> Descripción </h4>
   
@@ -913,7 +912,7 @@ Las búsquedas de caminos en estructura de datos son fundamentales para resolver
   
 ![WhatsApp Image 2024-04-30 at 23 41 02_42dcf095](https://github.com/Hante990/Estructuras_No_Lineales/assets/107586879/041c49f9-a48e-48ab-99f8-eb67ca1382ae)
 
-<h3 align = "center"> <font  font face = "bauhaus 93"> <a name=" Método del Trapecio "> Algoritmo de Dijkstra </a> </font> </h3>
+<h3 align = "center"> <font  font face = "bauhaus 93"> <a name="Dijkstra"> Algoritmo de Dijkstra </a> </font> </h3>
 
 <h4> <font font face = "arial"> Descripción </h4>
   
